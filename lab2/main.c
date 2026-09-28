@@ -22,10 +22,12 @@ int main() {
         // Child
         if (execlp(buff, buff, NULL)) {
           printf("Error executing program\n");
+          break;
         }
       } else if (pid < 0) {
         // Failure
         printf("Fork failure\n");
+        break;
       } else {
         // Parent
         int status = 0;
@@ -37,8 +39,11 @@ int main() {
       }
     } else {
       printf("Getline failure\n");
+      break;
     }
   }
+
+  free(buff);
 
   return 0;
 }

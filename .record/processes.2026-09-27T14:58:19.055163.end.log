@@ -1,0 +1,13 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+cmpt201        1  0.0  0.0  17144  8236 pts/0    Ss   14:57   0:00 zsh --login
+cmpt201      703  0.0  0.0   2904  2140 pts/0    S+   14:58   0:00 /home/cmpt201/.local/bin/record
+cmpt201      704  0.0  0.0 109984 24156 pts/0    S+   14:58   0:00 /home/cmpt201/.local/bin/record
+cmpt201     1172  0.0  0.0  17060  8208 pts/2    Ss   15:01   0:00 zsh --login
+cmpt201     1385  0.0  0.0   2904  2216 pts/2    S+   15:01   0:00 /home/cmpt201/.local/bin/record
+cmpt201     1386  0.0  0.0 109312 23376 pts/2    Sl+  15:01   0:00 /home/cmpt201/.local/bin/record
+cmpt201     1391  0.0  0.0 108604 23276 pts/2    Sl+  15:01   0:00 /usr/bin/python3 /usr/bin/asciinema rec --idle-time-limit=60 --stdin --quiet /tmp/.record/input.2.2026-09-27T15:01:56.124067
+cmpt201     1393  0.0  0.0  34840 15912 pts/2    S+   15:01   0:00 /usr/bin/python3 /usr/bin/asciinema rec --idle-time-limit=60 --stdin --quiet /tmp/.record/input.2.2026-09-27T15:01:56.124067
+cmpt201     1394  0.0  0.0  35116 16776 pts/2    S+   15:01   0:00 /usr/bin/python3 /usr/bin/asciinema rec --idle-time-limit=60 --stdin --quiet /tmp/.record/input.2.2026-09-27T15:01:56.124067
+cmpt201     1395  0.0  0.0   2808  1876 pts/3    Ss   15:01   0:00 sh -c /usr/bin/zsh
+cmpt201     1396  0.0  0.0  13860  7508 pts/3    S+   15:01   0:00 /usr/bin/zsh
+cmpt201     5490  0.0  0.0  13488  4556 pts/0    R+   16:33   0:00 ps aux
