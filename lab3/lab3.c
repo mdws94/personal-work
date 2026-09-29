@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 #define MAX_LENGTH 5
 
@@ -18,10 +19,14 @@ int main() {
     char *input = get_input();
 
     if (!strcmp(input, "print")) {
-      add_to_history(input);
-    } else {
       print_history();
+    } else {
+      add_to_history(input);
     }
+  }
+
+  while (history_count) {
+    free(input_history[history_count]);
   }
 }
 
@@ -30,13 +35,15 @@ char *get_input() {
   size_t size = 0;
   ssize_t length = 0;
 
-  printf("Enter input:\n> ");
+  printf("Enter input (input 'print' to print history):\n> ");
 
   if ((length = getline(&buff, &size, stdin)) != -1) {
-    buff[length - 1] = '\0';
+    if (size > 0 && buff[length - 1] == '\n') {
+      buff[length - 1] = '\0';
+    }
     return buff;
   } else {
-    printf("Getline failure");
+    perror("Getline failure\n");
     exit(1);
   }
 }
@@ -61,16 +68,19 @@ void remove_oldest_record() {
     }
 
     history_count--;
+
   } else {
-    printf("Error removing oldest record");
+    perror("Error removing oldest record");
   }
 }
 void print_history() {
-  if (!history_count) {
+  if (history_count > 0) {
     for (int i = 0; i <= history_count; i++) {
-      printf("%s\n", input_history[i]);
+      if (input_history[i]) {
+        printf("%s\n", input_history[i]);
+      }
     }
   } else {
-    printf("Input history empty");
+    printf("Input history empty\n");
   }
 }
