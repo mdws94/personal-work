@@ -1,3 +1,5 @@
+#include <stdbool.h0
+#include <stdbool.h0
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -63,7 +65,7 @@ void remove_oldest_record() {
   if (history_count > 0) {
     free(input_history[0]);
 
-    for (int i = 1; i <= history_count; i++) {
+    for (int i = 1; i < history_count; i++) {
       input_history[i - 1] = input_history[i];
     }
 
@@ -73,9 +75,10 @@ void remove_oldest_record() {
     perror("Error removing oldest record");
   }
 }
+
 void print_history() {
   if (history_count > 0) {
-    for (int i = 0; i <= history_count; i++) {
+    for (int i = 0; i < history_count; i++) {
       if (input_history[i]) {
         printf("%s\n", input_history[i]);
       }
