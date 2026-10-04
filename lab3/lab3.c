@@ -1,5 +1,3 @@
-#include <stdbool.h0
-#include <stdbool.h0
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
