@@ -34,9 +34,13 @@ int main() {
 
   print_out("First block: %p\n", &first_block_header, sizeof(first_block_header));
   print_out("First block size: %lu\n", &first_block_header->size, sizeof(first_block_header->size));
-
   print_block((char *)first_block_header);
+
+  write(1, "\n", 1);
+
   print_out("Second block: %p\n", &second_block_header, sizeof(second_block_header));
+  print_out("Second block size: %lu\n", &second_block_header->size,
+            sizeof(second_block_header->size));
   print_block((char *)second_block_header);
   return 0;
 }
@@ -70,7 +74,10 @@ void print_block(char *block_start) {
   for (int i = 0; i < BLOCK_SIZE - sizeof(struct header); ++i) {
     char *address = block_start + sizeof(struct header) + i;
     uint64_t val = (uint64_t)*address;
-    // TODO: Make print 16 bytes at a time.
-    print_out("%lu\n", &val, sizeof(val));
+    if ((i) % 16 == 0) {
+      write(1, "\n", 1);
+    }
+    print_out("%lu ", &val, sizeof(val));
   }
+  write(1, "\n", 1);
 }
