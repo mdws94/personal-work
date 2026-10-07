@@ -1,0 +1,8 @@
+trigger:open
+undo_seq:0
+source_path:/home/cmpt201/personal-work/inclass_activities/sigaction_example.c
+cursor:1,1
+lines:19
+changedtick:2
+reg_size:33
+source_relpath:inclass_activities/sigaction_example.c
