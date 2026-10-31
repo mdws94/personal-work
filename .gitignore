@@ -52,5 +52,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# .record and .nvim files
+*.record
+*.nvim
 # debug information files
 *.dwo
