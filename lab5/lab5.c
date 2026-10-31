@@ -37,7 +37,7 @@ int find_best_fit(struct header *free_list_ptr, uint64_t size) {
       uint64_t block_diff = free_list_ptr->size - size;
       if (block_diff < smallest_block_diff) {
         smallest_block_diff = block_diff;
-        best_fit_id = free_list_ptr->size;
+        best_fit_id = free_list_ptr->id;
       }
     }
     free_list_ptr = free_list_ptr->next;
@@ -55,7 +55,7 @@ int find_worst_fit(struct header *free_list_ptr, uint64_t size) {
       uint64_t block_diff = free_list_ptr->size - size;
       if (block_diff > largest_block_diff) {
         largest_block_diff = block_diff;
-        worst_fit_id = free_list_ptr->size;
+        worst_fit_id = free_list_ptr->id;
       }
     }
     free_list_ptr = free_list_ptr->next;
@@ -105,3 +105,13 @@ uint64_t absolute_difference(uint64_t a, uint64_t b) {
     return b - a;
   }
 }
+
+/*
+procedure: coalesce ()
+  check if z end where n starts
+  if yes merge
+
+  check if next block ends where the next block after starts and merge if yes
+
+  return when no more blocks
+ * */
