@@ -151,7 +151,9 @@ static void *run_client(void *args) {
       memcpy(new_node->data, msg_buf, BUF_SIZE);
 
       struct list_handle *list_handle = cargs->list_handle;
-      // TODO: Safely use add_to_list to add new_node to the list
+      pthread_mutex_lock(cargs->list_lock);
+      add_to_list(list_handle, new_node);
+      pthread_mutex_unlock(cargs->list_lock);
     }
   }
 
@@ -188,7 +190,13 @@ static void *run_acceptor(void *args) {
         client_args[num_clients].list_lock = aargs->list_lock;
         num_clients++;
 
-        pthread_create(&threads[num_clients - 1], NULL, run_client, &client_args[num_clients - 1]);
+        int err_val = pthread_create(&threads[num_clients - 1], NULL, run_client,
+                                     &client_args[num_clients - 1]);
+
+        if (err_val) {
+          fprintf(stderr, "Thread creation error. ERRNO: %d, %s\n", err_val, strerror(err_val));
+          exit(EXIT_FAILURE);
+        }
       }
     }
   }
@@ -197,8 +205,8 @@ static void *run_acceptor(void *args) {
 
   // Shutdown and cleanup
   for (int i = 0; i < num_clients; i++) {
-    // TODO: Set flag to stop the client thread
-    // TODO: Wait for the client thread and close its socket
+    client_args[i].run = false;
+    pthread_join(threads[i], NULL);
   }
 
   if (close(sfd) == -1) {
